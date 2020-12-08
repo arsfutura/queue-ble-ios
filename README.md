@@ -7,5 +7,5 @@ Sample App for iOS BLE blog post.
   - [iOS](https://apps.apple.com/us/app/nrf-connect-bluetooth-app/id1054362403)
 
 - Update ViewController.swift with custom UUIDs and device name. 
-- Tap start
+- Run & Tap start
 
