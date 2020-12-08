@@ -13,7 +13,7 @@ class ReadCommand<R>: Command where R: Receivable {
 
     private let characteristic: ReadableCharacteristic<R>
     private let reader: ReaderProtocol
-    private let completion: ((Result<R, Error>) -> ())
+    var completion: ((Result<R, Error>) -> ())
     var onComplete: () -> () = { }
     init(characteristic: ReadableCharacteristic<R>,
          reader: ReaderProtocol = Reader(),

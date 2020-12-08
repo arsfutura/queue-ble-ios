@@ -11,16 +11,17 @@ import SnapKit
 import Bluejay
 import CoreBluetooth
 
-
-let boolReadCharacteristic = ReadableCharacteristic<Bool>(characteristic: CBUUID(string: "0x1112"),
-                                                        service: CBUUID(string: "0x1111"))
-
-let boolWriteCharacteristic = WritableCharacteristic<Bool>(characteristic: CBUUID(string: "0x1112"),
-                                                        service: CBUUID(string: "0x1111"))
-
 class ViewController: UIViewController {
+    private let characteristicUUID = CBUUID(string: "0x1112")
+    private let serviceUUID = CBUUID(string: "0x1111")
+    private let deviceName = "Galaxy S7 edge"
 
-    var scanner: BluetoothScannerProtocol = BluetoothScanner()
+    private lazy var boolReadCharacteristic = ReadableCharacteristic<Bool>(characteristic: characteristicUUID,
+                                                             service: serviceUUID)
+    private lazy var boolWriteCharacteristic = WritableCharacteristic<Bool>(characteristic: characteristicUUID,
+                                                            service: serviceUUID)
+
+    private var scanner: BluetoothScannerProtocol = BluetoothScanner()
     private lazy var startButton: UIButton = {
         let button = UIButton()
         button.setTitleColor(.black, for: .normal)
@@ -49,7 +50,7 @@ class ViewController: UIViewController {
     }
     
     private func deviceWasDiscovered(newDiscovery: ScanDiscovery, discoveries: [ScanDiscovery]) -> ScanAction {
-        guard newDiscovery.peripheralIdentifier.name == "Galaxy S7 edge" else {
+        guard newDiscovery.peripheralIdentifier.name == deviceName else {
             return .continue
         }
         
